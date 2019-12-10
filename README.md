@@ -2,7 +2,19 @@
 
 1. Prepare Bash shell environment (Windows Terminal with Windows Subsystem for Linux is recommended.)
 
-2. Deploy Landing Zone Level0
+2. Install terraform (v0.12.12), jq, git, docker
+```
+$ sudo apt-get update -y
+$ wget https://releases.hashicorp.com/terraform/0.12.12/terraform_0.12.12_linux_amd64.zip
+$ sudo unzip ./terraform_0.12.12_linux_amd64.zip -d /usr/local/bin/
+$ terraform -v
+
+$ sudo apt-get install -y jq
+$ sudo apt install git-all
+```
+For docker daemon installation, refer https://docs.docker.com/install/linux/docker-ce/ubuntu/
+
+3. Deploy Landing Zone Level0
 ```
 # Install rover
 $ wget -O - --no-cache https://raw.githubusercontent.com/aztfmod/rover/master/install.sh | bash
