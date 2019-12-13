@@ -13,6 +13,40 @@ If not, go to https://insider.windows.com/en-us/ and click "REGISTER TO GET THE 
 Then, Go to Settings > Update & Security > Windows Insider Program and click Get Started to access the latest build.
 Select the 'Fast' ring or the 'Slow' ring.
 
+C:\Users\azureuser>ver
+Microsoft Windows [Version 10.0.19041.1]
+
+dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+
+On web browser, go to https://aka.ms/wslstore and install "Ubuntu"
+
+```
+Installing, this may take a few minutes...
+Please create a default UNIX user account. The username does not need to match your Windows username.
+For more information visit: https://aka.ms/wslusers
+Enter new UNIX username: azureuser
+Enter new UNIX password:
+Retype new UNIX password:
+passwd: password updated successfully
+Installation successful!
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+azureuser@win10:~$
+```
+Set a distro to be backed by WSL 2 using the command line
+```
+C:\WINDOWS\system32>wsl --set-version ubuntu 2
+Conversion in progress, this may take a few minutes...
+For information on key differences with WSL 2 please visit https://aka.ms/wsl2
+Please enable the Virtual Machine Platform Windows feature and ensure virtualization is enabled in the BIOS.
+For information please visit https://aka.ms/wsl2-install
+```
+Install Windows Terminal (Preview)
+https://www.microsoft.com/en-us/p/windows-terminal-preview/9n0dx20hk701
+
+
 
 1. Create service principal to running terraform
 ```
