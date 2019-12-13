@@ -1,5 +1,54 @@
 # Azure Terraform Landing Zone Tutorial
 
+## Setup environment 
+WSL 2 (Windows Subsystem for Linux 2) installation is recommended. 
+https://docs.microsoft.com/en-us/windows/wsl/wsl2-install
+
+1. Ensure that you are running Windows 10 build 18917 or higher
+C:\Users\azureuser>ver
+Microsoft Windows [Version 10.0.18363.535]
+
+If not, go to https://insider.windows.com/en-us/ and click "REGISTER TO GET THE PREVIEW"
+
+Then, Go to Settings > Update & Security > Windows Insider Program and click Get Started to access the latest build.
+Select the 'Fast' ring or the 'Slow' ring.
+
+
+1. Create service principal to running terraform
+```
+$ export SUBSCRIPTION_ID="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+$ az account set --subscription="${SUBSCRIPTION_ID}"
+$ az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/${SUBSCRIPTION_ID}"
+Creating a role assignment under the scope of "/subscriptions/87b7ed75-7074-41d6-9b53-3bf8894138bb"
+{
+  "appId": "aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+  "displayName": "azure-cli-2019-12-13-08-53-51",
+  "name": "http://azure-cli-2019-12-13-08-53-51",
+  "password": "bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbb",
+  "tenant": "cccccccc-cccc-cccc-cccc-cccccccccccc"
+}
+
+$ export ARM_SUBSCRIPTION_ID=your_subscription_id
+$ export ARM_CLIENT_ID=your_appId
+$ export ARM_CLIENT_SECRET=your_password
+$ export ARM_TENANT_ID=your_tenant_id
+
+$ cat test.tf
+provider "azurerm" {
+}
+resource "azurerm_resource_group" "rg" {
+        name = "testResourceGroup"
+        location = "westus"
+}
+
+$ terraform init
+
+$ terraform plan
+
+$ terraform apply
+```
+
+
 1. Prepare Bash shell environment (Windows Terminal with Windows Subsystem for Linux is recommended.)
 
 2. Install terraform (v0.12.12), jq, git, docker
