@@ -92,8 +92,8 @@ module "service1" {
 
   subnet_ip_offset                  = 4
 
-  admin_username                    = "azureuser"
-  admin_password                    = "Passw0rd!123"
+  admin_username                    = local.admin_username
+  admin_password                    = local.admin_password
 }
 ``` 
 
