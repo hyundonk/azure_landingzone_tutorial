@@ -1,5 +1,73 @@
 # Azure Terraform Landing Zone Tutorial
 
+## Terraform Tutorial
+
+1. Create resource group "testResourceGroup"
+```
+$ cat test.tf
+provider "azurerm" {
+}
+resource "azurerm_resource_group" "rg" {
+        name = "testResourceGroup"
+        location = "westus"
+}
+
+$ terraform init
+$ terraform plan
+$ terraform apply
+```
+2. Add variables.tf and outputs.tf
+```
+$ cat variables.tf
+variable "location" {
+ description = "This is azure region that this resource will reside"
+ default = "koreacentral"
+}
+
+$ cat outputs.tf
+output "resourcegroup_id" {
+ value = azurerm_resource_group.rg.id
+}
+
+$cat terraform.tfvars
+location = "westus"
+```
+
+2. Move backend to Azurerm backend (Azure Blob storage)
+```
+$ cat main.tf
+terraform {
+    backend "azurerm" {
+        storage_account_name = "mytfbackend"
+        container_name = "tfstate"
+        key = "test.terraform.tfstate"
+        access_key = "xxxxp5Nv8kTjdpYj9KwGIxeB+JkvmXKPLdpYjNY9/wE1pLM2RuOglxvuCA7RwLx7vdd2SFNCOCfIyyyyyyyyy=="
+    }
+}
+```
+
+3. Create Virtual Network
+```
+resource "azurerm_virtual_network" "example" {
+  name                = "myVNet"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+  address_space       = ["10.0.0.0/16"]
+
+  subnet {
+    name           = "subnet1"
+    address_prefix = "10.0.1.0/24"
+  }
+
+  tags = {
+    environment = "Production"
+  }
+}
+```
+
+
+
+
 ## Setup environment 
 WSL 2 (Windows Subsystem for Linux 2) installation is recommended. 
 https://docs.microsoft.com/en-us/windows/wsl/wsl2-install
