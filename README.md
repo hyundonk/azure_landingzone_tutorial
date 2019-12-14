@@ -67,7 +67,35 @@ resource "azurerm_subnet" "example" {
   address_prefix       = "10.0.1.0/24"
 }
 ```
+4. Create Ubuntu VMs in the subnet
+```
+$ cat virtual_machines.tf
+module "service1" {
+  source                            = "git://github.com/hyundonk/aztf-module-vm.git"
 
+  prefix                            = "exmp"
+  vm_num                            = 2
+
+  vm_name                           = "svc1"
+  vm_size                           = "Standard_D2s_v3"
+
+  vm_publisher                      = "Canonical"
+  vm_offer                          = "UbuntuServer"
+  vm_sku                            = "16.04.0-LTS"
+  vm_version                        = "latest"
+
+  location                          = azurerm_resource_group.rg.location
+  resource_group_name               = azurerm_resource_group.rg.name
+
+  subnet_id                         = azurerm_subnet.example.id
+  subnet_prefix                     = azurerm_subnet.example.address_prefix
+
+  subnet_ip_offset                  = 4
+
+  admin_username                    = "azureuser"
+  admin_password                    = "Passw0rd!123"
+}
+``` 
 
 
 
