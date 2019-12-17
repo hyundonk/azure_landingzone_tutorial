@@ -132,7 +132,7 @@ If not, go to https://insider.windows.com/en-us/ and click "REGISTER TO GET THE 
 
 Then, Go to Settings > Update & Security > Windows Insider Program and click Get Started to access the latest build.
 Select the 'Fast' ring or the 'Slow' ring.
-![Windows Upgrade](images/windowsupgrade.jpg)
+![Windows Update](images/windowsupdate.jpg)
 
 ```
 C:\Users\azureuser>ver
