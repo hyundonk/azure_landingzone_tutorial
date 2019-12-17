@@ -252,18 +252,18 @@ else
                 -backend-config access_key=${access_key} \
                 -backend-config key=${tf_name}
 
-        if [ ${tf_action} == "plan" ]; then
+        if [ "${tf_action}" == "plan" ]; then
                 echo "calling plan"
                 plan
         fi
 
-        if [ ${tf_action} == "apply" ]; then
+        if [ "${tf_action}" == "apply" ]; then
                 echo "calling plan and apply"
                 plan
                 apply
         fi
 
-        if [ ${tf_action} == "destroy" ]; then
+        if [ "${tf_action}" == "destroy" ]; then
                 echo "calling destroy"
                 destroy
         fi
