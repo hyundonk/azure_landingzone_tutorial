@@ -140,6 +140,7 @@ dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux 
 dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
 
 On web browser, go to https://aka.ms/wslstore and install "Ubuntu"
+![Install Ubuntu](images/ubuntu.jpg)
 
 ```
 Installing, this may take a few minutes...
