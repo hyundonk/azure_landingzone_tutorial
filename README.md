@@ -125,13 +125,15 @@ WSL 2 (Windows Subsystem for Linux 2) installation is recommended.
 https://docs.microsoft.com/en-us/windows/wsl/wsl2-install
 
 1. Ensure that you are running Windows 10 build 18917 or higher
+```
 C:\Users\azureuser>ver
 Microsoft Windows [Version 10.0.18363.535]
-
+```
 If not, go to https://insider.windows.com/en-us/ and click "REGISTER TO GET THE PREVIEW"
 
 Then, Go to Settings > Update & Security > Windows Insider Program and click Get Started to access the latest build.
 Select the 'Fast' ring or the 'Slow' ring.
+
 ![Windows Update](images/windowsupdate.jpg)
 
 ```
