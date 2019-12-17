@@ -129,9 +129,9 @@ https://docs.microsoft.com/en-us/windows/wsl/wsl2-install
 C:\Users\azureuser>ver
 Microsoft Windows [Version 10.0.18363.535]
 ```
-If not, go to https://insider.windows.com/en-us/ and click "REGISTER TO GET THE PREVIEW"
+2. If not, go to https://insider.windows.com/en-us/ and click "REGISTER TO GET THE PREVIEW"
 
-Then, Go to Settings > Update & Security > Windows Insider Program and click Get Started to access the latest build.
+3. Then, Go to Settings > Update & Security > Windows Insider Program and click Get Started to access the latest build.
 Select the 'Fast' ring or the 'Slow' ring.
 
 ![Windows Update](images/windowsupdate.jpg)
@@ -143,8 +143,9 @@ Microsoft Windows [Version 10.0.19041.1]
 > dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
 > dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
 ```
+Then reboot the machine...
 
-On web browser, go to https://aka.ms/wslstore and install "Ubuntu"
+4. On web browser, go to https://aka.ms/wslstore and install "Ubuntu"
 ![Install Ubuntu](images/ubuntu.jpg)
 
 ```
@@ -161,16 +162,132 @@ See "man sudo_root" for details.
 
 azureuser@win10:~$
 ```
-Set a distro to be backed by WSL 2 using the command line
+5. Set a distro to be backed by WSL 2 using the command line
+
 ```
 C:\WINDOWS\system32>wsl --set-version ubuntu 2
 Conversion in progress, this may take a few minutes...
 For information on key differences with WSL 2 please visit https://aka.ms/wsl2
-Please enable the Virtual Machine Platform Windows feature and ensure virtualization is enabled in the BIOS.
-For information please visit https://aka.ms/wsl2-install
+Conversion complete.
+C:\WINDOWS\system32>wsl --set-default-version 2
 ```
-Install Windows Terminal (Preview)
+6. Install Windows Terminal (Preview)
 https://www.microsoft.com/en-us/p/windows-terminal-preview/9n0dx20hk701
+
+## Azure Landing Zones - rover 
+1. Install Azure CLI
+```
+# Install python first which is required to install Azure CLI
+$ sudo apt install python-minimal
+
+# Install Azure CLI
+$ curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+```
+
+2. On ubuntu bash shell, install terraform, git, and jq
+```
+$ sudo apt-get update -y
+$ wget https://releases.hashicorp.com/terraform/0.12.12/terraform_0.12.12_linux_amd64.zip
+$ sudo unzip ./terraform_0.12.12_linux_amd64.zip -d /usr/local/bin/
+$ terraform -v
+$ sudo apt install git-all
+$ sudo apt-get install -y jq
+```
+
+3. Deploy Landing Zone Level0
+```
+$ git clone https://github.com/aztfmod/level0.git
+$ cd level0
+$ wget https://raw.githubusercontent.com/hyundonk/azure_landingzone_tutorial/master/launchpad.sh
+
+# Login to Azure
+$ az login
+
+# Run launchpad.sh
+$ ./launchpad.sh
+tf_action  is : ''
+tf_command is : ''
+blueprint  is : ''
+Calling initialize_state
+Initializing launchpad from launchpad_opensource
+rm: cannot remove './.terraform/terraform.tfstate': No such file or directory
+rm: cannot remove './terraform.tfstate': No such file or directory
+rm: cannot remove 'backend.azurerm.tf': No such file or directory
+
+Initializing the backend...
+
+Initializing provider plugins...
+- Checking for available provider plugins...
+- Downloading plugin for provider "azurerm" (hashicorp/azurerm) 1.37.0...
+- Downloading plugin for provider "azuread" (hashicorp/azuread) 0.6.0...
+- Downloading plugin for provider "random" (hashicorp/random) 2.2.1...
+
+The following providers do not have any version constraints in configuration,
+so the latest version was installed.
+
+To prevent automatic upgrades to new major versions that may contain breaking
+changes, it is recommended to add version = "..." constraints to the
+corresponding provider blocks in configuration, with the constraint strings
+suggested below.
+
+* provider.random: version = "~> 2.2"
+
+Terraform has been successfully initialized!
+
+You may now begin working with Terraform. Try running "terraform plan" to see
+any changes that are required for your infrastructure. All Terraform commands
+should now work.
+
+If you ever set or change modules or backend configuration for Terraform,
+rerun this command to reinitialize your working directory. If you forget, other
+commands will detect it and remind you to do so if necessary.
+var.location
+  Azure region to deploy the launchpad in the form or 'southeastasia' or 'westeurope'
+
+  Enter a value: koreacentral
+
+var.tf_name
+  Name of the terraform state in the blob storage
+
+  Enter a value: level0_launchpad.tfstate
+```
+Then check Azure resources created for level 0.
+
+
+
+```
+# Install git
+$ sudo apt-get update
+$ sudo apt-get install git-core
+
+# Install docker engine
+$ sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg-agent \
+    software-properties-common
+
+$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+$ sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+
+$ sudo apt-get install docker-ce docker-ce-cli containerd.io
+$ sudo service docker start
+$ sudo docker run hello-world
+
+# Instal "make" and "jq"
+$ sudo apt install make
+$ sudo apt install jq
+
+
+sudo chown "$USER":"$USER" /home/"$USER"/.docker -R
+sudo chmod g+rwx "/home/$USER/.docker" -R
+
+```
 
 
 
