@@ -132,12 +132,15 @@ If not, go to https://insider.windows.com/en-us/ and click "REGISTER TO GET THE 
 
 Then, Go to Settings > Update & Security > Windows Insider Program and click Get Started to access the latest build.
 Select the 'Fast' ring or the 'Slow' ring.
+![Windows Upgrade](images/windowsupgrade.jpg)
 
+```
 C:\Users\azureuser>ver
 Microsoft Windows [Version 10.0.19041.1]
 
-dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
-dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+> dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+> dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+```
 
 On web browser, go to https://aka.ms/wslstore and install "Ubuntu"
 ![Install Ubuntu](images/ubuntu.jpg)
