@@ -1,9 +1,27 @@
 # Azure Terraform Landing Zone Tutorial
 
 ## Terraform Tutorial
-
+Create Azure resources using Azure Cloud Shell
 1. Create resource group "testResourceGroup"
 ```
+$ export SUBSCRIPTION_ID="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+
+$ az account set --subscription="${SUBSCRIPTION_ID}"
+$ az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/${SUBSCRIPTION_ID}"
+Creating a role assignment under the scope of "/subscriptions/aaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+{
+  "appId": "aaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+  "displayName": "azure-cli-2019-12-13-08-53-51",
+  "name": "http://azure-cli-2019-12-13-08-53-51",
+  "password": "bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbb",
+  "tenant": "cccccccc-cccc-cccc-cccc-cccccccccccc"
+}
+
+$ export ARM_SUBSCRIPTION_ID=your_subscription_id
+$ export ARM_CLIENT_ID=your_appId
+$ export ARM_CLIENT_SECRET=your_password
+$ export ARM_TENANT_ID=your_tenant_id
+
 $ cat test.tf
 provider "azurerm" {
 }
@@ -33,7 +51,7 @@ $cat terraform.tfvars
 location = "westus"
 ```
 
-2. Move backend to Azurerm backend (Azure Blob storage)
+3. Move backend to Azurerm backend (Azure Blob storage)
 ```
 $ cat main.tf
 terraform {
@@ -46,7 +64,7 @@ terraform {
 }
 ```
 
-3. Create Virtual Network
+4. Create Virtual Network
 ```
 $ cat vnet.tf
 resource "azurerm_virtual_network" "example" {
@@ -67,7 +85,7 @@ resource "azurerm_subnet" "example" {
   address_prefix       = "10.0.1.0/24"
 }
 ```
-4. Create Ubuntu VMs in the subnet
+5. Create Ubuntu VMs in the subnet
 ```
 $ cat virtual_machines.tf
 module "service1" {
