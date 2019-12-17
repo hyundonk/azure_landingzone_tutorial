@@ -120,7 +120,7 @@ module "service1" {
 
 
 
-## Setup environment 
+## Azure Landing Zones - Setup environment 
 WSL 2 (Windows Subsystem for Linux 2) installation is recommended. 
 https://docs.microsoft.com/en-us/windows/wsl/wsl2-install
 
