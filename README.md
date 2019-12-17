@@ -174,7 +174,7 @@ C:\WINDOWS\system32>wsl --set-default-version 2
 6. Install Windows Terminal (Preview)
 https://www.microsoft.com/en-us/p/windows-terminal-preview/9n0dx20hk701
 
-## Azure Landing Zones - rover 
+## Lab #4. Azure Landing Zones - level 0
 1. Install Azure CLI
 ```
 # Install python first which is required to install Azure CLI
@@ -244,7 +244,7 @@ commands will detect it and remind you to do so if necessary.
 var.location
   Azure region to deploy the launchpad in the form or 'southeastasia' or 'westeurope'
 
-  Enter a value: koreacentral
+  Enter a value: southeastasia
 
 var.tf_name
   Name of the terraform state in the blob storage
@@ -253,14 +253,25 @@ var.tf_name
 ```
 Then check Azure resources created for level 0.
 
-
+## Azure Landing Zones - level 1 (foundation)
 
 ```
-# Install git
-$ sudo apt-get update
-$ sudo apt-get install git-core
+$ git clone https://github.com/aztfmod/landingzones.git
+$ cd landingzones/
+$ ../level0/launchpad.sh landingzone_caf_foundations apply
+```
 
-# Install docker engine
+## Azure Landing Zones - Level 2 (Network)
+```
+$ git clone https://github.com/aztfmod/landingzones.git
+$ cd landingzones/
+$ ../level0/launchpad.sh landingzone_vdc_demo apply
+```
+
+
+# Appendix
+Install docker engine
+```
 $ sudo apt-get install \
     apt-transport-https \
     ca-certificates \
@@ -279,13 +290,8 @@ $ sudo apt-get install docker-ce docker-ce-cli containerd.io
 $ sudo service docker start
 $ sudo docker run hello-world
 
-# Instal "make" and "jq"
-$ sudo apt install make
-$ sudo apt install jq
-
-
-sudo chown "$USER":"$USER" /home/"$USER"/.docker -R
-sudo chmod g+rwx "/home/$USER/.docker" -R
+$ sudo chown "$USER":"$USER" /home/"$USER"/.docker -R
+$ sudo chmod g+rwx "/home/$USER/.docker" -R
 
 ```
 
