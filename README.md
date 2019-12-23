@@ -177,9 +177,6 @@ https://www.microsoft.com/en-us/p/windows-terminal-preview/9n0dx20hk701
 ## Lab #4. Azure Landing Zones - level 0
 1. Install Azure CLI
 ```
-# Install python first which is required to install Azure CLI
-$ sudo apt install python-minimal
-
 # Install Azure CLI
 $ curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 ```
