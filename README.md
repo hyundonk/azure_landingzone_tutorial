@@ -200,6 +200,9 @@ $ wget https://raw.githubusercontent.com/hyundonk/azure_landingzone_tutorial/mas
 # Login to Azure
 $ az login
 
+# terraform variable "prefix"
+$ export TF_VAR_prefix="abcd"
+
 # Run launchpad.sh
 $ ./launchpad.sh
 tf_action  is : ''
