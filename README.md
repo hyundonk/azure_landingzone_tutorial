@@ -263,6 +263,13 @@ $ ../level0/launchpad.sh landingzone_caf_foundations apply
 
 ## Azure Landing Zones - Level 2 (Network)
 ```
+# set secrets for monitoring node (VM) in keyvault
+
+$ az keyvault set-policy -n $keyvault --upn username@example.com --secret-permissions set get list
+
+$ az keyvault secret set --vault-name $keyvault --name "adminusername" --value "username"
+$ az keyvault secret set --vault-name $keyvault --name "adminpassword" --value "password"
+
 $ git clone https://github.com/aztfmod/landingzones.git
 $ cd landingzones/
 $ ../level0/launchpad.sh landingzone_vdc_demo apply
