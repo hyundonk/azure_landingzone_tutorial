@@ -275,6 +275,19 @@ $ cd landingzones/
 $ ../level0/launchpad.sh landingzone_vdc_demo apply
 ```
 
+## Azure Landing Zones - Level 2 (3rd party firewall)
+```
+# set secrets for fortigate instances (VM) in keyvault
+
+$ az keyvault set-policy -n $keyvault --upn username@example.com --secret-permissions set get list
+
+$ az keyvault secret set --vault-name $keyvault --name "fortigate-adminusername" --value "username"
+$ az keyvault secret set --vault-name $keyvault --name "fortigate-adminpassword" --value "password"
+
+$ git clone https://github.com/aztfmod/landingzones.git
+$ cd landingzones/
+$ ../level0/launchpad.sh landingzone_vdc_demo apply
+
 
 # Appendix
 Install docker engine
