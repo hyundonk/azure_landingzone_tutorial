@@ -196,6 +196,7 @@ $ sudo apt-get install -y jq
 $ git clone https://github.com/aztfmod/level0.git
 $ cd level0
 $ wget https://raw.githubusercontent.com/hyundonk/azure_landingzone_tutorial/master/launchpad.sh
+$ chmod a+x ./launchpad.sh
 
 # Login to Azure
 $ az login
