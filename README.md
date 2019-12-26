@@ -276,8 +276,11 @@ $ cd landingzones/
 $ ../level0/launchpad.sh landingzone_vdc_demo apply
 ```
 
-## Azure Landing Zones - Level 2 (3rd party firewall)
+## Azure Landing Zones - Level 3 (3rd party firewall)
 ```
+# go to workspace root directory
+$ cd ../../
+
 # set secrets for fortigate instances (VM) in keyvault
 
 $ az keyvault set-policy -n $keyvault --upn username@example.com --secret-permissions set get list
@@ -285,9 +288,23 @@ $ az keyvault set-policy -n $keyvault --upn username@example.com --secret-permis
 $ az keyvault secret set --vault-name $keyvault --name "fortigate-adminusername" --value "username"
 $ az keyvault secret set --vault-name $keyvault --name "fortigate-adminpassword" --value "password"
 
-$ git clone https://github.com/aztfmod/landingzones.git
-$ cd landingzones/
-$ ../level0/launchpad.sh landingzone_vdc_demo apply
+$ git clone https://github.com/hyundonk/azure-terraform-fortigate-module.git
+$ cd azure-terraform-fortigate-module/firewall/
+
+
+# get fortigate license files and config.txt file to current directory.
+
+# upload license file and config file to Aprepare_fortigtate_bootstrap.shzure Blob Storage
+$ ./prepare_fortigtate_bootstrap.sh
+
+Run terraform init with setting environment vairables 
+$ . ./terraform_init.sh
+
+Run terraform apply
+$ terraform apply
+
+
+
 
 
 # Appendix
