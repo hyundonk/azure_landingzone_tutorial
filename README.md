@@ -181,11 +181,11 @@ https://www.microsoft.com/en-us/p/windows-terminal-preview/9n0dx20hk701
 $ curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 ```
 
-2. On ubuntu bash shell, install terraform, git, and jq
+2. On ubuntu bash shell, install terraform (v0.12.20), git, and jq
 ```
 $ sudo apt-get update -y
-$ wget https://releases.hashicorp.com/terraform/0.12.12/terraform_0.12.12_linux_amd64.zip
-$ sudo unzip ./terraform_0.12.12_linux_amd64.zip -d /usr/local/bin/
+$ wget https://releases.hashicorp.com/terraform/0.12.12/terraform_0.12.20_linux_amd64.zip
+$ sudo unzip ./terraform_0.12.20_linux_amd64.zip -d /usr/local/bin/
 $ terraform -v
 $ sudo apt install git-all
 $ sudo apt-get install -y jq
