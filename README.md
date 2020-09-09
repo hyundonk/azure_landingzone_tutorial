@@ -501,16 +501,6 @@ $ git clone https://github.com/aztfmod/level0.git
 
 ```
 
-4. Clone ebay Korea Landing Zones from repo
-
-```
-$ git clone https://github.com/hyundonk/ebkr-landing-zones.git
-$ cd ebkr-landing-zones/
-```
-
-5. Deploy tranquility landing zone (level1)
-
-
 
 
 
