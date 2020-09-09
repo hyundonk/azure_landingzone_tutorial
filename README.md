@@ -402,7 +402,7 @@ $ cd ~/git/github.com/aztfmod/rover
 # Modify ../level0/launchpad_opensource/main.tf
 locals {
   tfstate-blob-name = var.tf_name
-  prefix      = "ebkr"
+  prefix      = "abcd"
 }
 
 # Modify ../level0/launchpad_opensource/storage.tf
