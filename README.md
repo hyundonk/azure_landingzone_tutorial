@@ -267,7 +267,8 @@ $ sudo apt install git-all
 $ sudo apt-get install -y jq
 ```
 
-# Lab #4. Azure Landing Zones - level 0
+# Lab #4. Deploying Azure Landing Zones 
+## Azure Landing Zones - level 0
 
 3. Deploy Landing Zone Level0
 ```
