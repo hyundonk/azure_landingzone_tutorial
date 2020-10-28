@@ -4,7 +4,7 @@
 1. Azure subscription 
 2. Linux Virtual Machine (Ubuntu 16.04 or above)
 
-## Terraform Tutorial
+# Terraform Tutorial
 Create Azure resource group using Azure Cloud Shell
 
 0. On Azure Portal, Launch cloud shell and check terraform version on the cloud shell
@@ -188,7 +188,7 @@ $ terraform apply
 
 
 
-## Azure Landing Zones - Setup environment 
+# Azure Landing Zones - Setup environment 
 Option #1) Using WSL 2 (Windows Subsystem for Linux 2) on PC. 
 https://docs.microsoft.com/en-us/windows/wsl/wsl2-install
 
@@ -246,7 +246,7 @@ Option #2) Using Linux Machine
 
 When using WSL, sometimes terraform runs slow due to memory constraints. In such case, install an Azure Linux VM (e.g. Ubuntu 16.04 or later) instead of WSL
 
-## Lab #4. Azure Landing Zones - level 0
+# Lab #4. Azure Landing Zones - level 0
 1. Install Azure CLI
 ```
 # Install Azure CLI
