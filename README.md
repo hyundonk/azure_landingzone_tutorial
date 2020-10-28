@@ -109,7 +109,7 @@ terraform {
         storage_account_name = "tfstatedemo111"
         container_name = "tfstate"
         key = "demo.tfstate"
-        access_key = "xxxxp5Nv8kTjdpYj9KwGIxeB+JkvmXKPLdpYjNY9/wE1pLM2RuOglxvuCA7RwLx7vdd2SFNCOCfIyyyyyyyyy=="
+        access_key = "xxxxp5Nv8kTjdpYj9KwGIxeB+JkvmXKPLdpYjNY9/wE1pLM2RuOglxvuCA7RwLx7vdd2SFNCOCfIyyyyyyyyy==" # storage account key
     }
 }
 
@@ -121,7 +121,7 @@ $ terraform apply
 
 4. Create Virtual Network
 ```
-$ cat vnet.tf
+$ code vnet.tf
 resource "azurerm_virtual_network" "example" {
   name                = "myVNet"
   location            = azurerm_resource_group.rg.location
@@ -137,12 +137,17 @@ resource "azurerm_subnet" "example" {
   name                = "subnet1"
   resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.example.name
-  address_prefix       = "10.0.1.0/24"
+  address_prefixes     = ["10.0.1.0/24"]
 }
 ```
 5. Create Ubuntu VMs in the subnet
 ```
-$ cat virtual_machines.tf
+$ code vm.tf
+locals {
+    admin_username = "azureuser"
+    admin_password = "mypassword"
+}
+
 module "service1" {
   source                            = "git://github.com/hyundonk/aztf-module-vm.git"
   location                          = azurerm_resource_group.rg.location
@@ -160,9 +165,6 @@ module "service1" {
     vm_offer          = "WindowsServer"
     vm_sku            = "2016-Datacenter"
     vm_version        = "latest"
-    
-    prefix            = "exmp"
-    postfix           = null
   }
   
   subnet_id                         = azurerm_subnet.example.id
@@ -172,7 +174,13 @@ module "service1" {
   admin_password                    = local.admin_password
 }
 
+# Run "terraform init" for new module(s)
+$ terraform init
 
+# Run terraform plan and apply
+$ terraform plan
+
+$ terraform apply
 ``` 
 
 
