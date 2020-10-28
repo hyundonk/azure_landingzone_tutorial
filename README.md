@@ -1,9 +1,20 @@
 # Azure Terraform Landing Zone Tutorial
 
+## Pre-requisites
+1. Azure subscription 
+2. Linux Virtual Machine (Ubuntu 16.04 or above)
+
 ## Terraform Tutorial
-Create Azure resources using Azure Cloud Shell
+Create Azure resource group using Azure Cloud Shell
+0. On Azure Portal, Launch cloud shell and check terraform version on the cloud shell
+```
+$ terraform version
+Terraform v0.13.5
+```
+
 1. Create resource group "testResourceGroup"
 ```
+# Create a service principal that terraform will use to authenticate with Azzure
 $ export SUBSCRIPTION_ID="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 
 $ az account set --subscription="${SUBSCRIPTION_ID}"
@@ -22,43 +33,75 @@ $ export ARM_CLIENT_ID=your_appId
 $ export ARM_CLIENT_SECRET=your_password
 $ export ARM_TENANT_ID=your_tenant_id
 
-$ cat test.tf
+$ code test.tf
 provider "azurerm" {
+  features {}
 }
 resource "azurerm_resource_group" "rg" {
         name = "testResourceGroup"
         location = "westus"
 }
 
+# Run terraform init, plan, and apply.
 $ terraform init
 $ terraform plan
 $ terraform apply
 ```
-2. Add variables.tf and outputs.tf
+
+2. Add variables.tf and outputs.tf to use input and output variables
 ```
-$ cat variables.tf
+$ code variable.tf
 variable "location" {
  description = "This is azure region that this resource will reside"
  default = "koreacentral"
 }
 
-$ cat outputs.tf
+$ code output.tf
 output "resourcegroup_id" {
  value = azurerm_resource_group.rg.id
 }
 
-$cat terraform.tfvars
+$ code terraform.tfvars
 location = "westus"
+
+#Modify test.tf to use "location" variable
+$ code test.tf
+provider "azurerm" {
+  features {}
+}
+resource "azurerm_resource_group" "rg" {
+        name = "testResourceGroup"
+        location = var.location
+}
 ```
 
 3. Move backend to Azurerm backend (Azure Blob storage)
 ```
-$ cat main.tf
+# Create a storage account and container for backend state file
+az group create --name terraform-state --location koreacentral
+    
+az storage account create --name tfstatedemo111 \
+    --resource-group terraform-state \
+    --location koreacentral \
+    --sku Standard_GRS \
+    --kind StorageV2
+
+az storage account keys list -g terraform-state -n tfstatedemo111
+
+az storage container create \
+    --account-name tfstatedemo111 \
+    --name tfstate \
+    --account-key <storage-account-key>
+
+# Upload terraform.tfstate file to Azure Storage
+
+# Create main.tf to specify terraform backend 
+$ code main.tf
 terraform {
     backend "azurerm" {
-        storage_account_name = "mytfbackend"
+        storage_account_name = "tfstatedemo111"
         container_name = "tfstate"
-        key = "test.terraform.tfstate"
+        key = "demo.tfstate"
         access_key = "xxxxp5Nv8kTjdpYj9KwGIxeB+JkvmXKPLdpYjNY9/wE1pLM2RuOglxvuCA7RwLx7vdd2SFNCOCfIyyyyyyyyy=="
     }
 }
