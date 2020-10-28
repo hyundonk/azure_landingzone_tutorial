@@ -6,6 +6,7 @@
 
 ## Terraform Tutorial
 Create Azure resource group using Azure Cloud Shell
+
 0. On Azure Portal, Launch cloud shell and check terraform version on the cloud shell
 ```
 $ terraform version
@@ -88,12 +89,18 @@ az storage account create --name tfstatedemo111 \
 
 az storage account keys list -g terraform-state -n tfstatedemo111
 
+export AZURE_STORAGE_KEY="<storage account access key from above command>"
+
 az storage container create \
     --account-name tfstatedemo111 \
-    --name tfstate \
-    --account-key <storage-account-key>
-
+    --name tfstate
+    
 # Upload terraform.tfstate file to Azure Storage
+az storage blob upload \
+    --account-name tfstatedemo111 \
+    --container-name tfstate \
+    --name demo.tfstate \
+    --file terraform.tfstate
 
 # Create main.tf to specify terraform backend 
 $ code main.tf
@@ -105,6 +112,11 @@ terraform {
         access_key = "xxxxp5Nv8kTjdpYj9KwGIxeB+JkvmXKPLdpYjNY9/wE1pLM2RuOglxvuCA7RwLx7vdd2SFNCOCfIyyyyyyyyy=="
     }
 }
+
+# Run terraform init and apply again
+$ terraform init
+
+$ terraform apply
 ```
 
 4. Create Virtual Network
