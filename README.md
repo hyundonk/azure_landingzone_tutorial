@@ -271,7 +271,7 @@ $ sudo apt-get install -y jq
 
 3. Deploy Landing Zone Level0
 ```
-$ git clone https://github.com/aztfmod/level0.git
+$ git clone https://github.com/hyundonk/level0.git
 $ cd level0
 $ wget https://raw.githubusercontent.com/hyundonk/azure_landingzone_tutorial/master/launchpad.sh
 $ chmod a+x ./launchpad.sh
