@@ -189,6 +189,9 @@ $ terraform apply
 
 
 # Azure Landing Zones - Setup environment 
+
+## Terraform (open source) runtime options
+
 Option #1) Using WSL 2 (Windows Subsystem for Linux 2) on PC. 
 https://docs.microsoft.com/en-us/windows/wsl/wsl2-install
 
@@ -246,22 +249,25 @@ Option #2) Using Linux Machine
 
 When using WSL, sometimes terraform runs slow due to memory constraints. In such case, install an Azure Linux VM (e.g. Ubuntu 16.04 or later) instead of WSL
 
-# Lab #4. Azure Landing Zones - level 0
+## Install terraform and pre-requisites
+
 1. Install Azure CLI
 ```
 # Install Azure CLI
 $ curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 ```
 
-2. On ubuntu bash shell, install terraform (v0.12.20), git, and jq
+2. On ubuntu bash shell, install terraform (v0.13.5), git, and jq
 ```
 $ sudo apt-get update -y
-$ wget https://releases.hashicorp.com/terraform/0.12.12/terraform_0.12.20_linux_amd64.zip
-$ sudo unzip ./terraform_0.12.20_linux_amd64.zip -d /usr/local/bin/
+$ wget https://releases.hashicorp.com/terraform/0.13.5/terraform_0.13.5_linux_amd64.zip
+$ sudo unzip ./terraform_0.13.5_linux_amd64.zip -d /usr/local/bin/
 $ terraform -v
 $ sudo apt install git-all
 $ sudo apt-get install -y jq
 ```
+
+# Lab #4. Azure Landing Zones - level 0
 
 3. Deploy Landing Zone Level0
 ```
